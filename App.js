@@ -1,20 +1,38 @@
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, Button, Text } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import Input from './components/Input';
+import {DataProvider, useDataContext} from "./providers/DataProvider"
+import {List} from "./components/List"
 
-export default function App() {
+export const App = () => {
+  const [isAddMode, setIsAddMode] = useState(false);
+  
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <DataProvider>
+      <View style={styles.screen}>
+        <Text style={styles.text}>Úkolníček</Text>
+        <Button title="Přidat" onPress={() => setIsAddMode(true)} />
+        <Input visible={isAddMode} changeVisible={setIsAddMode} />
+        <List />
+        <StatusBar style="auto" />
+      </View>
+    </DataProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  screen: {
+    padding: 10,
+    display: "flex",
+    flexDirection: "column"
   },
+  text: {
+    padding: 10,
+    textAlign: "center",
+    fontSize: 24
+  }
 });
+
+export default App;
