@@ -7,7 +7,7 @@ export const Input = ({visible, changeVisible}) => {
     const {addItem} = useDataContext();
 
     return (
-        <Modal visible={visible} animationType="slide" style={styles.window}>
+        <Modal visible={visible} animationType="slide" style={styles.window} onRequestClose={e => changeVisible(false)}>
             <View style={styles.inputContainer}>
                 <TextInput
                     placeholder="Nějaký text"
@@ -28,7 +28,7 @@ export const Input = ({visible, changeVisible}) => {
     );
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
     window: {
         backgroundColor: "silver"
     },
@@ -52,6 +52,6 @@ const styles = StyleSheet.create({
     button: {
       width: '40%'
     }
-  });
+});
 
 export default Input;
